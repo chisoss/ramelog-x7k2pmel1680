@@ -796,7 +796,7 @@ function matchTimes(){
         const dt=normText(db[k].text);
         if(dt===key||dt.includes(key)||key.includes(dt)){
           if(normText(db[k].name)&&normText(m.name)&&normText(db[k].name)!==normText(m.name)&&dt!==key)continue;
-          m.time=db[k].time; m.ord=db[k].idx; m.msgImg=db[k].img||null; m.matched=true; j=k+1; return;
+          m.time=db[k].time; m.ord=db[k].idx; m.msgImg=(db[k].img!=null?db[k].img:null); m.matched=true; j=k+1; return;
         }
       }
     });
@@ -954,7 +954,7 @@ function buildLogHTML(msgs){
       out.push(`<div class="msg sys"${tcS?` style="background:${tabBg(tcS)};border-radius:8px"`:""}><div class="sysb">${body}</div></div>`);
       prev=m; return;
     }
-    const rawImg=m.msgImg||(m.exprLabel&&ch.exprs[m.exprLabel])||ch.img||"";
+    const rawImg=(m.msgImg!=null)?m.msgImg:((m.exprLabel&&ch.exprs[m.exprLabel])||ch.img||"");
     const imgUrl=IMG_MAP[rawImg]||rawImg;
     const showIcon=!(S.hideEmptyIcon&&!imgUrl);
     const grouped=S.groupMsg&&prev&&prev.name===m.name&&prev.tab===m.tab&&!gmSet.has(m.name)&&!sysSet.has(prev.name)&&!dice&&!isDice(prev.text);
