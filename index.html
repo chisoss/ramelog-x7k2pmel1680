@@ -967,7 +967,7 @@ function buildLogHTML(msgs){
       const icon=showIcon?`<div class="icon${imgUrl?"":" empty"}">${imgUrl?`<img src="${esc(imgUrl)}" style="object-position:center ${cropY}%;transform:scale(${zoom});transform-origin:center ${cropY}%" onerror="this.parentNode.classList.add('broken')">`:""}</div>`:"";
       const tm=S.showTime&&m.time!=null?`<span class="tm">${fmtTime(m.time)}</span>`:"";
       const tc=TABCOLORS[m.tab]||"";
-      const tabLb=S.timeSort?`<span class="tab">[${esc(m.tab)}]</span>`:"";
+      const tabLb=(S.timeSort&&m.tab.toLowerCase()!=="main")?`<span class="tab">[${esc(m.tab)}]</span>`:"";
       const stripe=tc?` style="background:${tabBg(tc)};border-radius:8px;padding:8px 12px"`:"";
       out.push(`<div class="msg ${S.groupMsg?"grp":""}"${stripe}>${icon}<div class="body"><div class="nm" style="color:${ch.color}">${esc(m.name)}${tabLb}${tm}</div><div class="tx ${dice?"dice":""}">${body}</div></div></div>`);
     }
